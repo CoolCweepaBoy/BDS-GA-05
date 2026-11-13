@@ -1,0 +1,628 @@
+{
+  "info": {
+    "_postman_id": "a7b4c9d1-3e2f-4a8b-9c1d-1234567890ab",
+    "name": "SportsShed Equipment Issue Management API",
+    "description": "Complete Postman collection for the SportsShed Backend Assignment (Node.js, Express, SQLite). Includes all 14 required endpoints across Players, Kits, Loans, JOIN details, Sport Search, and Summary by Sport.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "type": "string"
+    },
+    {
+      "key": "playerId",
+      "value": "5",
+      "type": "string"
+    },
+    {
+      "key": "kitId",
+      "value": "10",
+      "type": "string"
+    },
+    {
+      "key": "loanId",
+      "value": "3",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "01. Get all players",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/players",
+          "host": ["{{baseUrl}}"],
+          "path": ["players"]
+        },
+        "description": "Retrieves all registered players from the database."
+      },
+      "response": [
+        {
+          "name": "200 OK - List of Players",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/players",
+              "host": ["{{baseUrl}}"],
+              "path": ["players"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            { "key": "Content-Type", "value": "application/json; charset=utf-8" }
+          ],
+          "body": "[\n  {\n    \"id\": 1,\n    \"name\": \"Aarav Sharma\",\n    \"email\": \"aarav.sharma@college.edu\",\n    \"sport\": \"Cricket\"\n  },\n  {\n    \"id\": 2,\n    \"name\": \"Priya Nair\",\n    \"email\": \"priya.nair@college.edu\",\n    \"sport\": \"Football\"\n  }\n]"
+        }
+      ]
+    },
+    {
+      "name": "02. Add player",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const json = pm.response.json();",
+              "if (json && json.player && json.player.id) {",
+              "    pm.collectionVariables.set('playerId', String(json.player.id));",
+              "}"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Karan Mehta\",\n  \"email\": \"karan.mehta@college.edu\",\n  \"sport\": \"Cricket\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/players",
+          "host": ["{{baseUrl}}"],
+          "path": ["players"]
+        },
+        "description": "Creates a new player and stores the created player ID in {{playerId}}."
+      },
+      "response": [
+        {
+          "name": "201 Created - Player Added",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Karan Mehta\",\n  \"email\": \"karan.mehta@college.edu\",\n  \"sport\": \"Cricket\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/players",
+              "host": ["{{baseUrl}}"],
+              "path": ["players"]
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "_postman_previewlanguage": "json",
+          "header": [
+            { "key": "Content-Type", "value": "application/json; charset=utf-8" }
+          ],
+          "body": "{\n  \"message\": \"Player created successfully.\",\n  \"player\": {\n    \"id\": 5,\n    \"name\": \"Karan Mehta\",\n    \"email\": \"karan.mehta@college.edu\",\n    \"sport\": \"Cricket\"\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "03. Update player",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Karan Mehta\",\n  \"email\": \"karan.mehta@college.edu\",\n  \"sport\": \"Football\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/players/{{playerId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["players", "{{playerId}}"]
+        },
+        "description": "Updates an existing player's details."
+      },
+      "response": [
+        {
+          "name": "200 OK - Player Updated",
+          "originalRequest": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Karan Mehta\",\n  \"email\": \"karan.mehta@college.edu\",\n  \"sport\": \"Football\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/players/5",
+              "host": ["{{baseUrl}}"],
+              "path": ["players", "5"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            { "key": "Content-Type", "value": "application/json; charset=utf-8" }
+          ],
+          "body": "{\n  \"message\": \"Player updated successfully.\",\n  \"player\": {\n    \"id\": 5,\n    \"name\": \"Karan Mehta\",\n    \"email\": \"karan.mehta@college.edu\",\n    \"sport\": \"Football\"\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "04. Delete player",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/players/{{playerId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["players", "{{playerId}}"]
+        },
+        "description": "Deletes a player who does not have any existing loan references."
+      },
+      "response": [
+        {
+          "name": "200 OK - Player Deleted",
+          "originalRequest": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/players/5",
+              "host": ["{{baseUrl}}"],
+              "path": ["players", "5"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            { "key": "Content-Type", "value": "application/json; charset=utf-8" }
+          ],
+          "body": "{\n  \"message\": \"Player deleted successfully.\",\n  \"deletedPlayer\": {\n    \"id\": 5,\n    \"name\": \"Karan Mehta\",\n    \"email\": \"karan.mehta@college.edu\",\n    \"sport\": \"Football\"\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "05. Get all kits",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/kits",
+          "host": ["{{baseUrl}}"],
+          "path": ["kits"]
+        },
+        "description": "Retrieves all sports kits stored in the shed."
+      },
+      "response": [
+        {
+          "name": "200 OK - List of Kits",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/kits",
+              "host": ["{{baseUrl}}"],
+              "path": ["kits"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            { "key": "Content-Type", "value": "application/json; charset=utf-8" }
+          ],
+          "body": "[\n  {\n    \"id\": 1,\n    \"name\": \"Willow Cricket Bat\",\n    \"sport\": \"Cricket\",\n    \"status\": \"Issued\"\n  },\n  {\n    \"id\": 2,\n    \"name\": \"Leather Match Ball\",\n    \"sport\": \"Cricket\",\n    \"status\": \"Available\"\n  }\n]"
+        }
+      ]
+    },
+    {
+      "name": "06. Add kit",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const json = pm.response.json();",
+              "if (json && json.kit && json.kit.id) {",
+              "    pm.collectionVariables.set('kitId', String(json.kit.id));",
+              "}"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Practice Cricket Helmet\",\n  \"sport\": \"Cricket\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/kits",
+          "host": ["{{baseUrl}}"],
+          "path": ["kits"]
+        },
+        "description": "Adds a new kit (defaults status to Available) and stores its ID in {{kitId}}."
+      },
+      "response": [
+        {
+          "name": "201 Created - Kit Added",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Practice Cricket Helmet\",\n  \"sport\": \"Cricket\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/kits",
+              "host": ["{{baseUrl}}"],
+              "path": ["kits"]
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "_postman_previewlanguage": "json",
+          "header": [
+            { "key": "Content-Type", "value": "application/json; charset=utf-8" }
+          ],
+          "body": "{\n  \"message\": \"Kit added successfully.\",\n  \"kit\": {\n    \"id\": 10,\n    \"name\": \"Practice Cricket Helmet\",\n    \"sport\": \"Cricket\",\n    \"status\": \"Available\"\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "07. Update kit",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Pro Cricket Helmet\",\n  \"sport\": \"Cricket\",\n  \"status\": \"Available\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/kits/{{kitId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["kits", "{{kitId}}"]
+        },
+        "description": "Updates an existing kit with input validation."
+      },
+      "response": [
+        {
+          "name": "200 OK - Kit Updated",
+          "originalRequest": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Pro Cricket Helmet\",\n  \"sport\": \"Cricket\",\n  \"status\": \"Available\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/kits/10",
+              "host": ["{{baseUrl}}"],
+              "path": ["kits", "10"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            { "key": "Content-Type", "value": "application/json; charset=utf-8" }
+          ],
+          "body": "{\n  \"message\": \"Kit updated successfully.\",\n  \"kit\": {\n    \"id\": 10,\n    \"name\": \"Pro Cricket Helmet\",\n    \"sport\": \"Cricket\",\n    \"status\": \"Available\"\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "08. Delete kit",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/kits/{{kitId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["kits", "{{kitId}}"]
+        },
+        "description": "Deletes a kit that is not currently issued or referenced by loan records."
+      },
+      "response": [
+        {
+          "name": "200 OK - Kit Deleted",
+          "originalRequest": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/kits/10",
+              "host": ["{{baseUrl}}"],
+              "path": ["kits", "10"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            { "key": "Content-Type", "value": "application/json; charset=utf-8" }
+          ],
+          "body": "{\n  \"message\": \"Kit deleted successfully.\",\n  \"deletedKit\": {\n    \"id\": 10,\n    \"name\": \"Pro Cricket Helmet\",\n    \"sport\": \"Cricket\",\n    \"status\": \"Available\"\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "09. Search kits by sport",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/kits?search=Cricket",
+          "host": ["{{baseUrl}}"],
+          "path": ["kits"],
+          "query": [
+            { "key": "search", "value": "Cricket" }
+          ]
+        },
+        "description": "Performs a case-insensitive, parameterized SQL search by sport (also try search=Football)."
+      },
+      "response": [
+        {
+          "name": "200 OK - Matching Cricket Kits",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/kits?search=Cricket",
+              "host": ["{{baseUrl}}"],
+              "path": ["kits"],
+              "query": [
+                { "key": "search", "value": "Cricket" }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            { "key": "Content-Type", "value": "application/json; charset=utf-8" }
+          ],
+          "body": "[\n  {\n    \"id\": 1,\n    \"name\": \"Willow Cricket Bat\",\n    \"sport\": \"Cricket\",\n    \"status\": \"Issued\"\n  },\n  {\n    \"id\": 2,\n    \"name\": \"Leather Match Ball\",\n    \"sport\": \"Cricket\",\n    \"status\": \"Available\"\n  },\n  {\n    \"id\": 3,\n    \"name\": \"Batting Pads Set\",\n    \"sport\": \"Cricket\",\n    \"status\": \"Available\"\n  },\n  {\n    \"id\": 4,\n    \"name\": \"Wicket Keeping Gloves\",\n    \"sport\": \"Cricket\",\n    \"status\": \"Available\"\n  }\n]"
+        }
+      ]
+    },
+    {
+      "name": "10. Get all loans",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/loans",
+          "host": ["{{baseUrl}}"],
+          "path": ["loans"]
+        },
+        "description": "Retrieves all loan records from the loans table."
+      },
+      "response": [
+        {
+          "name": "200 OK - List of Loans",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/loans",
+              "host": ["{{baseUrl}}"],
+              "path": ["loans"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            { "key": "Content-Type", "value": "application/json; charset=utf-8" }
+          ],
+          "body": "[\n  {\n    \"id\": 1,\n    \"player_id\": 1,\n    \"kit_id\": 1,\n    \"loan_date\": \"2026-11-10\",\n    \"return_date\": null\n  },\n  {\n    \"id\": 2,\n    \"player_id\": 2,\n    \"kit_id\": 5,\n    \"loan_date\": \"2026-11-05\",\n    \"return_date\": \"2026-11-08\"\n  }\n]"
+        }
+      ]
+    },
+    {
+      "name": "11. Issue kit",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const json = pm.response.json();",
+              "if (json && json.loan && json.loan.id) {",
+              "    pm.collectionVariables.set('loanId', String(json.loan.id));",
+              "}"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"player_id\": 3,\n  \"kit_id\": 2,\n  \"loan_date\": \"2026-11-12\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/loans",
+          "host": ["{{baseUrl}}"],
+          "path": ["loans"]
+        },
+        "description": "Issues an Available kit (kit_id: 2) to a player (player_id: 3) inside an atomic transaction and sets kit status to Issued."
+      },
+      "response": [
+        {
+          "name": "201 Created - Kit Issued",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"player_id\": 3,\n  \"kit_id\": 2,\n  \"loan_date\": \"2026-11-12\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/loans",
+              "host": ["{{baseUrl}}"],
+              "path": ["loans"]
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "_postman_previewlanguage": "json",
+          "header": [
+            { "key": "Content-Type", "value": "application/json; charset=utf-8" }
+          ],
+          "body": "{\n  \"message\": \"Kit issued successfully.\",\n  \"loan\": {\n    \"id\": 3,\n    \"player_id\": 3,\n    \"kit_id\": 2,\n    \"loan_date\": \"2026-11-12\",\n    \"return_date\": null\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "12. Return kit",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"return_date\": \"2026-11-12\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/loans/{{loanId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["loans", "{{loanId}}"]
+        },
+        "description": "Records the return date for an active loan and changes the kit status back to Available."
+      },
+      "response": [
+        {
+          "name": "200 OK - Kit Returned",
+          "originalRequest": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"return_date\": \"2026-11-12\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/loans/3",
+              "host": ["{{baseUrl}}"],
+              "path": ["loans", "3"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            { "key": "Content-Type", "value": "application/json; charset=utf-8" }
+          ],
+          "body": "{\n  \"message\": \"Kit returned successfully.\",\n  \"loan\": {\n    \"id\": 3,\n    \"player_id\": 3,\n    \"kit_id\": 2,\n    \"loan_date\": \"2026-11-12\",\n    \"return_date\": \"2026-11-12\"\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "13. Get loan details using JOIN",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/loans/details",
+          "host": ["{{baseUrl}}"],
+          "path": ["loans", "details"]
+        },
+        "description": "Combines loans, players, and kits using SQL INNER JOIN to display player and kit names alongside loan info."
+      },
+      "response": [
+        {
+          "name": "200 OK - Joined Loan Details",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/loans/details",
+              "host": ["{{baseUrl}}"],
+              "path": ["loans", "details"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            { "key": "Content-Type", "value": "application/json; charset=utf-8" }
+          ],
+          "body": "[\n  {\n    \"loan_id\": 1,\n    \"player_id\": 1,\n    \"player_name\": \"Aarav Sharma\",\n    \"kit_id\": 1,\n    \"kit_name\": \"Willow Cricket Bat\",\n    \"sport\": \"Cricket\",\n    \"loan_date\": \"2026-11-10\",\n    \"return_date\": null\n  },\n  {\n    \"loan_id\": 2,\n    \"player_id\": 2,\n    \"player_name\": \"Priya Nair\",\n    \"kit_id\": 5,\n    \"kit_name\": \"Match Football Size 5\",\n    \"sport\": \"Football\",\n    \"loan_date\": \"2026-11-05\",\n    \"return_date\": \"2026-11-08\"\n  }\n]"
+        }
+      ]
+    },
+    {
+      "name": "14. Get summary by sport",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/kits/summary",
+          "host": ["{{baseUrl}}"],
+          "path": ["kits", "summary"]
+        },
+        "description": "Returns the total number of kits grouped by sport using SQL COUNT() and GROUP BY."
+      },
+      "response": [
+        {
+          "name": "200 OK - Summary by Sport",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/kits/summary",
+              "host": ["{{baseUrl}}"],
+              "path": ["kits", "summary"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            { "key": "Content-Type", "value": "application/json; charset=utf-8" }
+          ],
+          "body": "[\n  {\n    \"sport\": \"Basketball\",\n    \"count\": 2\n  },\n  {\n    \"sport\": \"Cricket\",\n    \"count\": 4\n  },\n  {\n    \"sport\": \"Football\",\n    \"count\": 3\n  }\n]"
+        }
+      ]
+    }
+  ]
+}
