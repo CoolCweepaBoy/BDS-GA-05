@@ -1,9 +1,21 @@
+# Dependencies
 node_modules/
+
+# SQLite databases & transient WAL/journal files
 database/*.db
 database/*.db-journal
 database/*.db-wal
 database/*.db-shm
 tests/*.db
 tests/*.db-*
+
+# Environment variables & secrets
 .env
+.env.*
+.env.local
+
+# Operating system & log files
 .DS_Store
+Thumbs.db
+*.log
+npm-debug.log*
