@@ -202,16 +202,18 @@ sports-shed/
 │   └── players.js                     # /players routes
 │
 ├── screenshots/
+│   ├── add-player.png                 # Evidence: POST /players request
 │   ├── kits-api.png                   # Evidence: GET /kits response
 │   ├── kits-search.png                # Evidence: GET /kits?search=Cricket
 │   ├── kits-summary.png               # Evidence: GET /kits/summary aggregation
 │   ├── loan-details.png               # Evidence: GET /loans/details 3-table JOIN
 │   ├── loans-api.png                  # Evidence: GET /loans response
 │   ├── players-api.png                # Evidence: GET /players response
-│   ├── postman-testing.png            # Evidence: 14/14 Postman collection tests passed
+│   ├── postman-testing.png            # Evidence: Collection testing (POST /players)
 │   ├── project-structure.png          # Evidence: Project structure in IDE explorer
 │   ├── root-api.png                   # Evidence: GET / health and endpoints overview
-│   └── server-running.png             # Evidence: Server startup in PowerShell terminal
+│   ├── server-running.png             # Evidence: Server startup in PowerShell terminal
+│   └── update-player.png              # Evidence: PUT /players/:id request
 │
 ├── tests/
 │   └── summary.test.js                # Automated integration tests (10 test cases, 0 failures)
@@ -535,8 +537,11 @@ Genuine screenshots captured directly from the running project, active endpoints
 ### 9. Loan Details API Response (3-Table SQL JOIN)
 ![Loan Details API](screenshots/loan-details.png)
 
-### 10. Postman Collection Testing Results (14/14 Tests Passed)
-![Postman Testing](screenshots/postman-testing.png)
+### 10. API Collection Testing Results (POST /players — Add Player)
+![API Testing Add Player](screenshots/postman-testing.png)
+
+### 11. API Collection Testing Results (PUT /players/:id — Update Player)
+![API Testing Update Player](screenshots/update-player.png)
 
 ---
 
