@@ -7,14 +7,14 @@ SportsShed is a backend-based Equipment Issue Management System developed using 
 
 ## Group Members Table
 
-| S.No. | Member Name | Roll Number | Class | Assigned Role |
+| S.No. | Member Name | Roll Number | Class-AIDE 2B - 313 | Assigned Role |
 |---|---|---|---|---|
-| 1 | Ashraf | [Enter Roll No.] | [Enter Class] | Backend Server & Routing Developer |
-| 2 | Gopal | [Enter Roll No.] | [Enter Class] | Database Designer & SQL Developer |
-| 3 | Harsha | [Enter Roll No.] | [Enter Class] | REST API & CRUD Developer |
-| 4 | Rizwana | [Enter Roll No.] | [Enter Class] | Validation & Search Developer |
-| 5 | Ehtesham | [Enter Roll No.] | [Enter Class] | Software Tester & Quality Analyst |
-| 6 | Kaushik | [Enter Roll No.] | [Enter Class] | Documentation & API Testing Engineer |
+| 1 | Ashraf | [252U1R5120] | AIDE 2B - 313 | Backend Server & Routing Developer |
+| 2 | Gopal | [252U1R5113] | AIDE 2B - 313 | Database Designer & SQL Developer |
+| 3 | Harsha | [252U1R5085] | AIDE 2B - 313 | REST API & CRUD Developer |
+| 4 | Rizwana | [252U1R5090] | AIDE 2B - 313 | Validation & Search Developer |
+| 5 | Ehtesham | [252U1R5103] | AIDE 2B - 313 | Software Tester & Quality Analyst |
+| 6 | Kaushik | [252U1R5092] | AIDE 2B - 313 | Documentation & API Testing Engineer |
 
 ---
 
